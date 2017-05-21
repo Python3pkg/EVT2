@@ -27,24 +27,24 @@ class Pulse_EVT2(item.item):
     not deal with GUI stuff.
     """
     
-    description = u"Allows setting pins on the EventExchanger-2 (USB) Port"
+    description = "Allows setting pins on the EventExchanger-2 (USB) Port"
     
     def reset(self):
         self.var._value = 0
         self.var._duration = 500
-        self.var._serialNumber = u'autodetect'
+        self.var._serialNumber = 'autodetect'
           
     def prepare(self):
 
         item.item.prepare(self)
   
         dev = self.var._serialNumber
-        if dev == u"autodetect":
+        if dev == "autodetect":
             dev = None
 		# Dynamically create an ee instance
         if not hasattr(self.experiment, "EventExchanger"):
             self.experiment.EventExchanger = libevt.libevt(self.experiment, dev)
-            self.python_workspace[u'EventExchanger'] = self.experiment.EventExchanger
+            self.python_workspace['EventExchanger'] = self.experiment.EventExchanger
 
     def run(self):
 

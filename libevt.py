@@ -45,19 +45,19 @@ class libevt:
 			from System.Reflection import Assembly
             
 			directory=os.getcwd()
-			print directory 
+			print(directory) 
 			pluginfolder = os.dirname(__file__)
 			Assembly.UnsafeLoadFrom(directory+'\share\opensesame_plugins\Pulse_EVT2\HidSharp.dll')
 			Assembly.UnsafeLoadFrom(directory+'\share\opensesame_plugins\Pulse_EVT2\HidSharp.DeviceHelpers.dll')
 			Assembly.UnsafeLoadFrom(directory+'\share\opensesame_plugins\Pulse_EVT2\EventExchanger.dll')
             
-		except Exception, e:
-			print e.Message
-			print e.Source                                                     
+		except Exception as e:
+			print(e.Message)
+			print(e.Source)                                                     
 		
 		try:
 			self._EVT2 = clr.ID.EventExchanger()
-			print self._EVT2.Attached()
+			print(self._EVT2.Attached())
 			self._nEVT2 = self._EVT2.Attached().count('/')+1
 		except Exception as e:
 			raise osexception('EVT2 Error')
@@ -72,10 +72,10 @@ class libevt:
 					print("Starting the only attached EVT")
 					self._EVT2.Start()
 				else:
-					print("Starting device %s" % self._EVT2.Attached().partition('/')[0])
+					print(("Starting device %s" % self._EVT2.Attached().partition('/')[0]))
         			self._EVT2.Start(self._EVT2.Attached().partition('/')[0])
 			except Exception as e:
-				print e.Message
+				print(e.Message)
 				raise osexception(
 					"libEVT2 does not know how to auto-detect the EVT on your platform. Please specify a device.")
 
